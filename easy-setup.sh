@@ -1,5 +1,5 @@
 #!/bin/bash
-clear; echo -e "Arch Linux Easy Setup: v0.4 - 20230204" ; sleep 2
+clear; echo -e "Arch Easy Setup Script: v0.5 - 20230205" ; sleep 2
 
 echo -e "\nDo you want to add bash shortcuts now (y/n)";read shortcuts
 echo -e "\nDo you want to add Systemback and Chaotic-AUR repos, and install yay now (y/n)?";read repos
@@ -12,6 +12,7 @@ echo -e "alias ls='ls --color=auto -alh'\nalias install='yay -S'\nalias remove='
 fi
 
 if [[ $repos == y* ]]; then
+
 # Add Systemback entries to pacman.conf
 echo -e "\n\nAdding Systemback to pacman"
 cp /etc/pacman.conf .
@@ -28,6 +29,7 @@ sudo cp -r ./pacman.conf /etc; rm ./pacman.conf
 # Install yay
 sudo pacman -Sy --noconfirm yay
 fi
+
 # Common directories setup
 if [[ $common == y* ]]; then
 
@@ -96,14 +98,23 @@ echo -e "\nInstalling Omen sound driver"
 yay -S --noconfirm sof-firmware
 fi
 
+# Install Gnome stuff
 if [[ $gnome == y* ]]; then
 echo "Installing Gnome stuff!"
 yay -S --noconfirm gnome-shell-extension-arc-menu gnome-shell-extension-arch-update gnome-shell-extension-bing-wallpaper gnome-shell-extension-dash-to-panel-git gnome-shell-extension-ddterm appeditor-git nemo nemo-terminal
+
+# Autostart Nemo as desktop handler
+echo -e "[Desktop Entry]\nType=Application\nExec=nemo-desktop\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\nName[en_US]=Nemo Desktop\nName=Nemo Desktop\nComment[en_US]=\nComment=" >> /home/$USER/.config/autostart/nemo-desktop.desktop
+chmod +x /home/$USER/.config/autostart/nemo-desktop.desktop
+
+# Remove Gnome fluff
 sleep 3; echo -e "\n\n... and I'll just remove some Gnome fluff...\n" ; sleep 3
 yay -R --noconfirm epiphany vim htop gnome-text-editor gnome-system-monitor gnome-photos gnome-maps gnome-logs gnome-font-viewer gnome-software gnome-clocks gnome-contacts gnome-characters gnome-backgrounds cheese nautilus
 sudo cp -r Adwaita-dark /usr/share/themes
+
 else
 
+# Install Plasma stuff
 echo "Installing Plasma stuff!"
 yay -S --noconfirm yakuake kio-gdrive 
 yay -R --noconfirm vim
