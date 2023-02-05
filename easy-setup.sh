@@ -1,5 +1,5 @@
 #!/bin/bash
-clear; echo -e "Arch Easy Setup Script: v0.5 - 20230205" ; sleep 2
+clear; echo -e "Arch Easy Setup Script: v0.6 - 20230205" ; sleep 2
 
 echo -e "\nDo you want to add bash shortcuts now (y/n)";read shortcuts
 echo -e "\nDo you want to add Systemback and Chaotic-AUR repos, and install yay now (y/n)?";read repos
@@ -80,11 +80,11 @@ fi
 # Confirm options for proceeding
 sleep 3 ; echo -e "\n\n\n\n\nBasic setup completed.\nPress ENTER now to continue installing general software (including browser), or CTRL-C to quit now:"; read
 echo -e "\n\nWould you like to install Gnome extensions (y/n)?"; read gnome
-echo -e "\n\nWould you like to install Omen sound driver (y/n)?"; read omen
+echo -e "\n\nWould you like to install HP Omen sound driver firmware (y/n)?"; read omen
 
 
 echo -e "\n\nInstalling general software"
-yay -S --noconfirm ttf-ms-fonts hplip system-config-printer cups libreoffice-fresh vlc libdvdread libdvdcss libcdio featherpad downgrade lutris wine winetricks vulkan-icd-loader lib32-vulkan-icd-loader vulkan-intel lib32-vulkan-intel vkd3d lib32-vkd3d lib32-alsa-plugins lib32-libpulse lib32-openal mesa lib32-mesa systemback
+yay -S --noconfirm ttf-ms-fonts hplip system-config-printer cups libreoffice-fresh vlc libdvdread libdvdcss libcdio downgrade lutris wine winetricks vulkan-icd-loader lib32-vulkan-icd-loader vulkan-intel lib32-vulkan-intel vkd3d lib32-vkd3d lib32-alsa-plugins lib32-libpulse lib32-openal mesa lib32-mesa systemback
 
 echo -e "\n\nInstalling browser"
 if [[ $browser == y* ]]; then
@@ -94,14 +94,14 @@ if [[ $browser == y* ]]; then
 fi
 
 if [[ $omen == y* ]]; then
-echo -e "\nInstalling Omen sound driver"
+echo -e "\nInstalling Omen sound driver firmware"
 yay -S --noconfirm sof-firmware
 fi
 
 # Install Gnome stuff
 if [[ $gnome == y* ]]; then
 echo "Installing Gnome stuff!"
-yay -S --noconfirm gnome-shell-extension-arc-menu gnome-shell-extension-arch-update gnome-shell-extension-bing-wallpaper gnome-shell-extension-dash-to-panel-git gnome-shell-extension-ddterm appeditor-git nemo nemo-terminal
+yay -S --noconfirm gnome-shell-extension-arc-menu gnome-shell-extension-arch-update gnome-shell-extension-bing-wallpaper gnome-shell-extension-dash-to-panel-git gnome-shell-extension-ddterm appeditor-git nemo nemo-terminal gnome-themes-extra
 
 # Autostart Nemo as desktop handler
 echo -e "[Desktop Entry]\nType=Application\nExec=nemo-desktop\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\nName[en_US]=Nemo Desktop\nName=Nemo Desktop\nComment[en_US]=\nComment=" >> /home/$USER/.config/autostart/nemo-desktop.desktop
@@ -109,8 +109,7 @@ chmod +x /home/$USER/.config/autostart/nemo-desktop.desktop
 
 # Remove Gnome fluff
 sleep 3; echo -e "\n\n... and I'll just remove some Gnome fluff...\n" ; sleep 3
-yay -R --noconfirm epiphany vim htop gnome-text-editor gnome-system-monitor gnome-photos gnome-maps gnome-logs gnome-font-viewer gnome-software gnome-clocks gnome-contacts gnome-characters gnome-backgrounds cheese nautilus
-sudo cp -r Adwaita-dark /usr/share/themes
+yay -R --noconfirm epiphany vim htop gnome-system-monitor gnome-photos gnome-maps gnome-logs gnome-font-viewer gnome-software gnome-clocks gnome-contacts gnome-characters gnome-backgrounds cheese nautilus
 
 else
 
