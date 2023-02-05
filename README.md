@@ -19,6 +19,10 @@ By default, the script installs default Microsoft fonts (eg Tahoma, Arial etc), 
 
 If you choose to do so, the script installs some Gnome extensions that I like and find useful, as well as Nemo file manager. It also removes some other Gnome components I don't use (including Nautilus), as well as vim (why does everyone like that text editor?). Again, make sure you check this out toward the end of the script before using it. Download and extract the Adwaita-dark.tar.gz archive into the same folder as the script before running it, and the script will also install it into /usr/share/themes, to provide a consistent Adwaita Dark theme across all apps. Note this applies mainly to Gnome desktop only.
 
+Since we are replacing Nautilus with Nemo on Gnome desktop, the script also creates a desktop entry in ~/.config/autostart, to activate Nemo as the desktop icon handler. After rebooting, right-click the desktop and select Customize, and then select the desktop icons (Home, Computer, etc.) you want on your desktop. You can also change the grid spacing and a few other options.
+
+Note: at this point, adding desktop icons for network locations (eg Google Drive) works for the root folder of the network drive. However, on Google Drive at least (I haven't tested other network locations), attempting to link other folders or files from your Google Drive onto the desktop does not work. The link and icon will be created on the desktop, but clicking the icon to access the file will not work. If anyone has any idea how to fix this, please let me know!
+
 Note: the script does not activate any of the Gnome extensions it installs - after rebooting, this is easily done through the Extensions app.
 
 If you don't choose the Gnome components, the script will instead install Yakuake (drop-down terminal) and Kio-GDrive (for Google Drive access within KDE/Plasma).
