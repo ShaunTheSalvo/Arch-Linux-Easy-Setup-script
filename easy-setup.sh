@@ -82,10 +82,11 @@ sleep 3 ; echo -e "\n\n\n\n\nBasic setup completed.\nPress ENTER now to continue
 echo -e "\n\nWould you like to install Gnome extensions (y/n)?"; read gnome
 echo -e "\n\nWould you like to install HP Omen sound driver firmware (y/n)?"; read omen
 
-
+# Install general software
 echo -e "\n\nInstalling general software"
-yay -S --noconfirm ttf-ms-fonts hplip system-config-printer cups libreoffice-fresh vlc libdvdread libdvdcss libcdio downgrade lutris wine winetricks vulkan-icd-loader lib32-vulkan-icd-loader vulkan-intel lib32-vulkan-intel vkd3d lib32-vkd3d lib32-alsa-plugins lib32-libpulse lib32-openal mesa lib32-mesa systemback
+yay -S --noconfirm ttf-ms-fonts hplip system-config-printer cups libreoffice-fresh vlc libdvdread libdvdcss libcdio downgrade lutris wine winetricks vulkan-icd-loader lib32-vulkan-icd-loader vulkan-intel lib32-vulkan-intel vkd3d lib32-vkd3d lib32-alsa-plugins lib32-libpulse lib32-openal mesa lib32-mesa ntfs-3g exfat-utils systemback
 
+# Install browser
 echo -e "\n\nInstalling browser"
 if [[ $browser == y* ]]; then
 	yay -S --noconfirm firefox
@@ -94,7 +95,7 @@ if [[ $browser == y* ]]; then
 fi
 
 if [[ $omen == y* ]]; then
-echo -e "\nInstalling Omen sound driver firmware"
+echo -e "\nInstalling HP Omen sound driver firmware"
 yay -S --noconfirm sof-firmware
 fi
 
